@@ -19,6 +19,9 @@ class Board:
     def is_full(self) -> bool:
         return enums.BoardValue.EMPTY not in self.values
 
+    def empty_values(self) -> int:
+        return self.values.count(enums.BoardValue.EMPTY)
+
     def get_winner(self) -> Optional[enums.BoardValue]:
         player_values = [ enums.BoardValue.O, enums.BoardValue.X ]
         for player_value in player_values:

@@ -15,7 +15,7 @@ class MinimaxPlayer(AbstractPlayer):
         for i in range(len(board.values)):
             if board.values[i] == enums.BoardValue.EMPTY:
                 board.values[i] = self.board_value
-                score = self.__minimax(board, 0, False)
+                score = self.__minimax(board, 0, False, -math.inf, math.inf)
                 board.values[i] = enums.BoardValue.EMPTY
                 
                 if score > best_score:
@@ -24,7 +24,7 @@ class MinimaxPlayer(AbstractPlayer):
 
         return best_move
 
-    def __minimax(self, board: Board, depth: int, is_maximising: bool) -> int:
+    def __minimax(self, board: Board, depth: int, is_maximising: bool, alpha: float, beta: float) -> int:
         winner = board.get_winner()
         if winner == self.board_value:
             return 1
@@ -39,7 +39,17 @@ class MinimaxPlayer(AbstractPlayer):
         for i in range(len(board.values)):
             if board.values[i] == enums.BoardValue.EMPTY:
                 board.values[i] = self.board_value if is_maximising else self.other_board_value 
-                score = self.__minimax(board, depth + 1, not is_maximising)
+                score = self.__minimax(board, depth + 1, not is_maximising, alpha, beta)
                 board.values[i] = enums.BoardValue.EMPTY
                 best_score = max(score, best_score) if is_maximising else min(score, best_score)
+
+                # Alpha beta pruning
+                if is_maximising:
+                    alpha = max(alpha, best_score)
+                else:
+                    beta = min(beta, best_score)
+                
+                if beta <= alpha:
+                    break
+
         return best_score
