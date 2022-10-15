@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Tuple
 import utils.constants as constants
 import utils.enums as enums
 
@@ -22,11 +22,12 @@ class Board:
     def empty_values(self) -> int:
         return self.values.count(enums.BoardValue.EMPTY)
 
-    def get_winner(self) -> Optional[enums.BoardValue]:
+    def get_winner(self) -> Optional[dict]:
         player_values = [ enums.BoardValue.O, enums.BoardValue.X ]
         for player_value in player_values:
-            if self.__is_winner(player_value):
-                return player_value
+            winning_comb = self.__is_winner(player_value)
+            if winning_comb is not None:
+                return { "player_value": player_value, "winning_comb": winning_comb }
     
     def place_value(self, position: int, board_value: enums.BoardValue) -> bool:
         if board_value == enums.BoardValue.EMPTY:
@@ -41,7 +42,7 @@ class Board:
         self.values[position] = board_value
         return True
 
-    def __is_winner(self, board_value: enums.BoardValue) -> bool:
+    def __is_winner(self, board_value: enums.BoardValue) -> Optional[List[int]]:
         for winning_combination in self.winning_combinations:
             winner = True
             for index in winning_combination:
@@ -49,8 +50,7 @@ class Board:
                     winner = False
                     break
             if winner:
-                return True
-        return False
+                return winning_combination
 
     def __get_winning_combinations(self) -> List[List[int]]:
         result = []

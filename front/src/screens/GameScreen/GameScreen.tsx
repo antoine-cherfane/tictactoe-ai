@@ -64,6 +64,13 @@ export default function GameScreen() {
         return headerText;
     };
 
+    const getSquareColorClass = (index: number) => {
+        if (gameState.winning_comb != null && gameState.winning_comb.includes(index)) {
+            return "square-red";
+        }
+        return "square-aqua";
+    };
+
     const disable = (player1 && player2)? " disable" : "";
 
     return (
@@ -79,7 +86,7 @@ export default function GameScreen() {
                 <p className="header-text">{getHeaderText()}</p>
                 {player1 && player2 && <div className="game" >
                     {gameState.board.map((value, index) => (
-                        <Square key={index} className={BOARD_CLASSES[index]}  onClick={() => handleClick(index)} value={value} />
+                        <Square key={index} className={`${BOARD_CLASSES[index]}  ${getSquareColorClass(index)}`}  onClick={() => handleClick(index)} value={value} />
                     ))}
                 </div>}
 

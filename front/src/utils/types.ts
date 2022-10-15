@@ -18,6 +18,7 @@ interface GameStatusDto {
     board: string[],
     status?: string,
     result?: number,
+    winning_comb?: number[],
     turn?: string,
     p1?: string,
     p2?: string

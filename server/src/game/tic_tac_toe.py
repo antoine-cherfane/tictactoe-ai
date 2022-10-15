@@ -19,13 +19,20 @@ class TicTacToe:
         
         self.p_turn = self.p2 if self.p_turn == self.p1 else self.p1
 
-    def check_winner(self) -> Optional[int]:
-        winner = self.board.get_winner()
-        if winner == self.p1.board_value:
-            return 1
+    def check_winner(self) -> Optional[dict]:
+        winner_response = self.board.get_winner()
+        result = None
+        if winner_response is not None:
+            if winner_response["player_value"] == self.p1.board_value:
+                result = 1
 
-        if winner == self.p2.board_value:
-            return 2
+            if winner_response["player_value"] == self.p2.board_value:
+                result = 2
+        elif self.board.is_full():
+            result = 0
 
-        if self.board.is_full():
-            return 0
+        if result is not None:
+            return {
+                "result": result,
+                "winning_comb": None if winner_response is None else winner_response["winning_comb"]
+            }

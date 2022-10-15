@@ -39,10 +39,11 @@ class MakeMoveDto(AbstractBaseDto):
         }
 
 class GameStatusDto(AbstractBaseDto):
-    def __init__(self, board: List[str], status: str, result: Optional[int], turn: Optional[str], p1: Optional[str], p2: Optional[str]) -> None:
+    def __init__(self, board: List[str], status: str, result: Optional[int], winning_comb: Optional[List[int]], turn: Optional[str], p1: Optional[str], p2: Optional[str]) -> None:
         self.board = board
         self.status = status
         self.result = result
+        self.winning_comb = winning_comb
         self.turn = turn
         self.p1 = p1
         self.p2 = p2
@@ -52,6 +53,7 @@ class GameStatusDto(AbstractBaseDto):
             "board": self.board,
             "status": self.status,
             "result": self.result,
+            "winning_comb": self.winning_comb,
             "turn": self.turn,
             "p1": self.p1,
             "p2": self.p2

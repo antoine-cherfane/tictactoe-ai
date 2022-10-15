@@ -25,12 +25,13 @@ class ExpectimaxPlayer(AbstractPlayer):
         return best_move
 
     def __expectimax(self, board: Board, depth: int, is_expecting: bool) -> int:
-        winner = board.get_winner()
-        if winner == self.board_value:
-            return 1
+        winner_response = board.get_winner()
+        if winner_response is not None:
+            if winner_response["player_value"] == self.board_value:
+                return 1
 
-        if winner == self.other_board_value:
-            return -1
+            if winner_response["player_value"] == self.other_board_value:
+                return -1
         
         if board.is_full():
             return 0

@@ -32,10 +32,18 @@ class GameNamespace(socketio.AsyncNamespace):
 
 
     async def emit_game_state(self):
+        result = None
+        winning_comb = None
+        winner_response = self.game.check_winner()
+        if winner_response is not None:
+            result = winner_response["result"]
+            winning_comb = winner_response["winning_comb"]
+
         game_status_dto = GameStatusDto(
             self.game.board.to_json(),
             self.status.value,
-            self.game.check_winner(),
+            result,
+            winning_comb,
             self.game.p_turn.board_value.value,
             self.game.p1.board_value.value,
             self.game.p2.board_value.value

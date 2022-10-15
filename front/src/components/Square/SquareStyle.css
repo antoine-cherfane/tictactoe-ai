@@ -1,7 +1,14 @@
 .square {
     border: 1px black solid;
-    background-color:aqua;
     font-size: 100px;
+}
+
+.square-aqua {
+    background-color:aqua;
+}
+
+.square-red {
+    background-color:red;
 }
 
 .squareValue {
