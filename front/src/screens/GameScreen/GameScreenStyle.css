@@ -50,6 +50,7 @@
 
 .player1 {
     color: yellowgreen;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
     display: flex;
     flex-direction: column;
@@ -85,5 +86,8 @@
 }
 
 .header-text {
-    color: white
+    color: yellowgreen;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    width: 10rem;
 }
