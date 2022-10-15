@@ -7,10 +7,7 @@ const INITIAL_GAME_PARAMS: InitParamsDto = {
     empty_value: " "
 };
 const INITIAL_GAME_STATE: GameStatusDto = {
-    board: new Array(INITIAL_GAME_PARAMS.board_size ** 2).fill(INITIAL_GAME_PARAMS.empty_value),
-    status: null,
-    result: null,
-    turn: null
+    board: new Array(INITIAL_GAME_PARAMS.board_size ** 2).fill(INITIAL_GAME_PARAMS.empty_value)
 };
 
 export {

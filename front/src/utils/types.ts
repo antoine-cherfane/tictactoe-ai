@@ -16,9 +16,15 @@ interface MakeMoveDto {
 
 interface GameStatusDto {
     board: string[],
-    status: string | null,
+    status?: string,
     result?: number,
     turn?: string,
     p1?: string,
     p2?: string
+}
+
+interface SquareProps {
+    value: string,
+    onClick: () => void,
+    className: string
 }

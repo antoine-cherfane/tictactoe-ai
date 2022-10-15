@@ -1,11 +1,8 @@
-import React from "react";
 import GameScreen from "./screens/GameScreen";
 
 
-function App() {
+export default function App() {
   return (
     <GameScreen/>
   );
 }
-
-export default App;

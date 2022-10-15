@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./GameScreenStyle.css";
 import Square from "../../components/Square";
-import {FiRotateCcw} from "react-icons/fi"
-import { io } from "socket.io-client";
+import { FiRotateCcw } from "react-icons/fi"
+import { io, Socket } from "socket.io-client";
 import {
     URI,
     BOARD_CLASSES,
@@ -12,7 +12,7 @@ import {
 import { Events, GameStatus } from "../../utils/enums";
 
 
-let socket;
+let socket: Socket;
 export default function GameScreen() {
     const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
     const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
@@ -29,7 +29,10 @@ export default function GameScreen() {
             setGameParams(data);
         });
 
-        return () => socket.close();
+        return () => {
+            socket.close();
+            return;
+        }
     }, []);
 
     useEffect(() => {
@@ -41,12 +44,12 @@ export default function GameScreen() {
     const handleClick = (index: number) => {
         if (gameState.status !== GameStatus.PENDING || gameState.board[index] !== gameParams.empty_value) return;
         socket.emit("make_move", { position: index });
-    }
+    };
 
     const handleRetry = () => {
         setPlayer1(null);
         setPlayer2(null);
-    }
+    };
 
     const getHeaderText = () => {
         let headerText = "";
@@ -59,9 +62,9 @@ export default function GameScreen() {
         else if (gameState.turn === "X") headerText = "Player 1 to play";
         else if (gameState.turn === "O") headerText = "Player 2 to play";
         return headerText;
-    }
+    };
 
-    const disable = (player1 && player2)? " disable" : ""
+    const disable = (player1 && player2)? " disable" : "";
 
     return (
         <div className="main">
