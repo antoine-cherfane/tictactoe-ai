@@ -39,7 +39,7 @@ class MakeMoveDto(AbstractBaseDto):
         }
 
 class GameStatusDto(AbstractBaseDto):
-    def __init__(self, board: List[str], status: str, result: Optional[str], turn: Optional[str], p1: Optional[str], p2: Optional[str]) -> None:
+    def __init__(self, board: List[str], status: str, result: Optional[int], turn: Optional[str], p1: Optional[str], p2: Optional[str]) -> None:
         self.board = board
         self.status = status
         self.result = result

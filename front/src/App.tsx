@@ -1,4 +1,6 @@
-import GameScreen from './screens/GameScreen';
+import React from "react";
+import GameScreen from "./screens/GameScreen";
+
 
 function App() {
   return (
